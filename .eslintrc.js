@@ -1,6 +1,14 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: ['airbnb', 'plugin:css-modules/recommended'],
   parser: 'babel-eslint',
+  plugins: ['css-modules'],
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 2017,
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   env: {
     jest: true,
   },

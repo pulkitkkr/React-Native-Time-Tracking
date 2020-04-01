@@ -1,7 +1,14 @@
 module.exports = {
-  extends: ['airbnb', 'plugin:css-modules/recommended'],
+  extends: [
+    'airbnb',
+    'plugin:css-modules/recommended',
+    'prettier',
+    'prettier/react',
+    'plugin:prettier/recommended',
+    'eslint-config-prettier',
+  ],
   parser: 'babel-eslint',
-  plugins: ['css-modules'],
+  plugins: ['css-modules', 'prettier'],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2017,
@@ -17,7 +24,7 @@ module.exports = {
   },
   rules: {
     'no-use-before-define': 'off',
-    'react/tsx-filename-extension': 'off',
+    'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
     'comma-dangle': 'off',
     'import/extensions': [

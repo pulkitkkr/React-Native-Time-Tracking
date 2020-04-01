@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . && stylelint '**/*.@(css|scss|sass|less|styl)'"
+    "lint": "eslint . && stylelint '**/*.@(css|scss|sass|less|styl)'",
+    "tsm": "tsm src"
   },
   "dependencies": {
     "react": "16.11.0",

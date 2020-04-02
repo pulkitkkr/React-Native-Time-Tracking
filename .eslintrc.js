@@ -6,9 +6,10 @@ module.exports = {
     'plugin:prettier/recommended',
     'eslint-config-prettier',
     'plugin:css-modules/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  parser: 'babel-eslint',
-  plugins: ['css-modules', 'prettier'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['css-modules', 'prettier', 'import'],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2017,
@@ -26,6 +27,9 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true, // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+      },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },

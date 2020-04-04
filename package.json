@@ -11,6 +11,8 @@
     "tsm": "tsm src"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^6.4.0",
+    "@react-native-firebase/auth": "^6.4.0",
     "react": "16.11.0",
     "react-native": "0.62.0",
     "react-native-config": "^1.0.0"

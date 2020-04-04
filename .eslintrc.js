@@ -50,6 +50,7 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/prefer-default-export': 'off',
   },
   globals: {
     fetch: false,

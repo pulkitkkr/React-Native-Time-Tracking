@@ -1115,9 +1115,9 @@
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
 
-"@types/react-native@kristerkari/react-native-types-for-css-modules":
-  version "0.61.23"
-  resolved "https://codeload.github.com/kristerkari/react-native-types-for-css-modules/tar.gz/2a98d248c73a425f0331e9db3a23b5767a4ae550"
+"@types/react-native@pulkitkkr/react-native-types-for-css-modules":
+  version "0.62.1"
+  resolved "https://codeload.github.com/pulkitkkr/react-native-types-for-css-modules/tar.gz/25a0be3c762bc829cb84098cc23ff746f05b8e64"
   dependencies:
     "@types/react" "*"
 
@@ -1606,9 +1606,11 @@ babel-plugin-module-resolver@^4.0.0:
     reselect "^4.0.0"
     resolve "^1.13.1"
 
-babel-plugin-react-native-classname-to-style@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-classname-to-style/-/babel-plugin-react-native-classname-to-style-1.2.2.tgz#2a51cdfb57bd436d20139e0d749b979564692191"
+babel-plugin-react-native-classname-to-dynamic-style@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-classname-to-dynamic-style/-/babel-plugin-react-native-classname-to-dynamic-style-0.22.0.tgz#ebdae002a7dea6a3ab93aa4686954fc02e82bcbd"
+  dependencies:
+    react-native-dynamic-style-processor "^0.21.0"
 
 babel-plugin-react-native-platform-specific-extensions@^1.1.1:
   version "1.1.1"
@@ -2330,6 +2332,10 @@ css-to-react-native@^2.3.0:
     camelize "^1.0.0"
     css-color-keywords "^1.0.0"
     postcss-value-parser "^3.3.0"
+
+css-viewport-units-transform@^0.10.2:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/css-viewport-units-transform/-/css-viewport-units-transform-0.10.3.tgz#e98b8adf7a9de7a2b394b3f4adb0004865d04a9a"
 
 css@^2.2.4:
   version "2.2.4"
@@ -5201,6 +5207,14 @@ metro@0.58.0, metro@^0.58.0:
     xpipe "^1.0.5"
     yargs "^14.2.0"
 
+micro-memoize@^2.0.3:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/micro-memoize/-/micro-memoize-2.1.2.tgz#0787eeb1a12b4033a0fe162dfc9df4280291cee4"
+
+micro-memoize@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/micro-memoize/-/micro-memoize-3.0.2.tgz#91f4412e5515be5bab50acc1e0c1d6834e57c5e2"
+
 micromatch@^3.1.10, micromatch@^3.1.4:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
@@ -6181,6 +6195,21 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.8.1, react-is@^16.8.4, react-
 react-native-config@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.0.0.tgz#fada8f79996db1eadcee9e221afd713c91f677e5"
+
+react-native-css-media-query-processor@^0.21.1:
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/react-native-css-media-query-processor/-/react-native-css-media-query-processor-0.21.3.tgz#1186c949b1b32a5e1d817fedb8bf629464dee3e3"
+  dependencies:
+    deepmerge "^3.2.0"
+    micro-memoize "^3.0.1"
+
+react-native-dynamic-style-processor@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/react-native-dynamic-style-processor/-/react-native-dynamic-style-processor-0.21.0.tgz#32b9fe30a4d07c9e3ee6b32662eb5812518bd18e"
+  dependencies:
+    css-viewport-units-transform "^0.10.2"
+    micro-memoize "^2.0.3"
+    react-native-css-media-query-processor "^0.21.1"
 
 react-native-gesture-handler@^1.6.1:
   version "1.6.1"

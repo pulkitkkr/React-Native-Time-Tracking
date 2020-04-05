@@ -11,7 +11,7 @@ const HomePage = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <Text className={css.someClass}>HomePage Hai</Text>
+          <Text className={[css.some, css.someClass]}>HomePage Hai</Text>
           <Button title="Sign Out" onPress={signOut} />
         </ScrollView>
       </SafeAreaView>

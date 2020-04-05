@@ -1,20 +1,10 @@
 import * as React from 'react';
 import { SafeAreaView, ScrollView, Text, StatusBar, Button } from 'react-native';
-import auth from '@react-native-firebase/auth';
-import { UserContext } from '@context/UserContext';
+import { UserContext, UserProviderInterface } from '@context/UserContext';
 import css from './index.scss';
 
-const signOut = (setUser: Function) => {
-  auth()
-    .signOut()
-    .then(() => {
-      setUser(null);
-    });
-};
-
 const HomePage = () => {
-  // @ts-ignore
-  const { setUser } = React.useContext(UserContext);
+  const { signOut }: UserProviderInterface = React.useContext(UserContext);
 
   return (
     <>
@@ -22,7 +12,7 @@ const HomePage = () => {
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <Text className={css.someClass}>HomePage Hai</Text>
-          <Button title="Sign Out" onPress={() => signOut(setUser)} />
+          <Button title="Sign Out" onPress={signOut} />
         </ScrollView>
       </SafeAreaView>
     </>

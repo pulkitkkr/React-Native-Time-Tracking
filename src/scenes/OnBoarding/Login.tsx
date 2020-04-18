@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
+
 import { UserContext, UserProviderInterface } from '@context/UserContext';
+import { GoogleAuthButton } from '@styleguide/components/index';
 
 const Login = () => {
   const { signIn, signUp, forgotPassword }: UserProviderInterface = React.useContext(UserContext);
@@ -20,6 +22,7 @@ const Login = () => {
       <Button onPress={() => signIn(email, password)} title="Sign In" />
       <Button onPress={() => signUp(email, password)} title="Sign Up" />
       <Button onPress={() => forgotPassword(email)} title="Forgot Password" />
+      <GoogleAuthButton />
     </View>
   );
 };

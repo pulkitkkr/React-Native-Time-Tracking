@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
+import { createUserProfileDocument, getUserDataFromSnapShot, UserCollection } from '@api/Firestore';
 
 export type User = FirebaseAuthTypes.User | null;
 
@@ -51,11 +52,28 @@ export const UserContext = React.createContext<UserProviderInterface>({
 });
 
 const UserProvider = ({ children }: props) => {
-  const [user, setUser] = useState<User>(null);
+  const [authData, setAuthData] = useState<User>(null);
+  const [user, setUser] = useState<any>(null);
 
-  const onAuthStateChanged = (userDataFromAuth: User) => {
-    setUser(userDataFromAuth);
+  const onAuthStateChanged = async (userDataFromAuth: User) => {
+    setAuthData(userDataFromAuth);
+    createUserProfileDocument(userDataFromAuth, {});
   };
+
+  useEffect(() => {
+    if (!authData) {
+      setUser(null);
+    } else {
+      const { uid } = authData;
+
+      const subscriber = UserCollection.doc(uid).onSnapshot((userSnapshot) => {
+        const userData = getUserDataFromSnapShot(userSnapshot, uid);
+        setUser(userData);
+      });
+
+      return () => subscriber();
+    }
+  }, [authData]);
 
   useEffect(() => {
     return auth().onAuthStateChanged(onAuthStateChanged);

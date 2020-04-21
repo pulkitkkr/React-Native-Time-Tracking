@@ -1,1 +1,1 @@
-export * as Firestore from './Firestore';
+export * as FirebaseUser from './FirebaseUser';

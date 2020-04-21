@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
-import { createUserProfileDocument, getUserDataFromSnapShot, UserCollection } from '@api/Firestore';
+import { createUserProfileDocument, getUserDataFromSnapShot, UserCollection } from '@api/FirebaseUser';
 import { User, UserDataFromAuth, UserCredentialFromAuth } from '@types/User';
 
 type authenticationFunction = (

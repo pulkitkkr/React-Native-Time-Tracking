@@ -8,8 +8,11 @@ const GoogleAuthButton = () => {
 
   return (
     <GoogleSigninButton
+      style={{
+        borderRadius: 8,
+      }}
       size={GoogleSigninButton.Size.Wide}
-      color={GoogleSigninButton.Color.Dark}
+      color={GoogleSigninButton.Color.Light}
       onPress={() =>
         onGoogleSignIn()
           .then(() => console.log('Signed in with Google!'))

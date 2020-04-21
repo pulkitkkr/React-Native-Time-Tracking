@@ -1,17 +1,34 @@
 import * as React from 'react';
 import { View, Text, TextInput } from 'react-native';
+import Animation from 'lottie-react-native';
 
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { GoogleAuthButton } from '@styleguide/components/index';
 import { Button, ButtonOutlined } from '@styleguide/components/Button';
+import AnimatedClipart from './animation.json';
 
 const Login = () => {
   const { signIn, signUp, forgotPassword }: UserProviderInterface = React.useContext(UserContext);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const animationRef = React.useRef(null);
 
+  React.useEffect(() => {
+    if (!animationRef) return;
+
+    animationRef.current.play();
+  }, [animationRef]);
   return (
     <View>
+      <Animation
+        ref={animationRef}
+        style={{
+          width: 300,
+          height: 300,
+        }}
+        loop
+        source={AnimatedClipart}
+      />
       <Text>Please Login Here</Text>
       <TextInput placeholder="Email" value={email} onChangeText={(text) => setEmail(text)} />
       <TextInput

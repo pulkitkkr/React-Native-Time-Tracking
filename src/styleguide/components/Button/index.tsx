@@ -1,0 +1,52 @@
+import * as React from 'react';
+import styled from 'styled-components/native';
+import { TouchableOpacityProps } from 'react-native';
+
+import { uiColorToBaseColor, UiColor } from '@styleguide/styles/color';
+
+const DefaultTouchableOpacity = styled.TouchableOpacity<{ color: UiColor }>`
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 13px 35px;
+  margin: 5px;
+  ${(props) => (props.color ? `background-color: ${uiColorToBaseColor(props.color)}` : '')}
+`;
+
+const DefaultButtonOutlined = styled(DefaultTouchableOpacity)`
+  border: 2px solid ${uiColorToBaseColor('purple')};
+`;
+
+const DefaultButtonText = styled.Text<{ color: UiColor }>`
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  ${(props) => (props.color ? `color: ${uiColorToBaseColor(props.color)}` : '')}
+`;
+
+interface Props extends TouchableOpacityProps {
+  children: React.ReactNode | string;
+  color: UiColor;
+  textColor?: UiColor;
+}
+
+const CreateButtonWithWrapper = (props: Props, ButtonWrapper: React.FunctionComponent<Props>) => {
+  const { children, color, textColor, ...otherProps } = props;
+
+  let childNode = children;
+
+  if (typeof children === 'string') {
+    childNode = <DefaultButtonText color={textColor || 'black'}>{children}</DefaultButtonText>;
+  }
+
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <ButtonWrapper color={color} {...otherProps}>
+      {childNode}
+    </ButtonWrapper>
+  );
+};
+
+export const Button = (props: Props) => CreateButtonWithWrapper(props, DefaultTouchableOpacity);
+
+export const ButtonOutlined = (props: Props) =>
+  CreateButtonWithWrapper(props, DefaultButtonOutlined);

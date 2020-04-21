@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { GoogleAuthButton } from '@styleguide/components/index';
+import { Button, ButtonOutlined } from '@styleguide/components/Button';
 
 const Login = () => {
   const { signIn, signUp, forgotPassword }: UserProviderInterface = React.useContext(UserContext);
@@ -19,9 +20,19 @@ const Login = () => {
         textContentType="password"
         onChangeText={(text) => setPassword(text)}
       />
-      <Button onPress={() => signIn(email, password)} title="Sign In" />
-      <Button onPress={() => signUp(email, password)} title="Sign Up" />
-      <Button onPress={() => forgotPassword(email)} title="Forgot Password" />
+      <Button color="purple" textColor="white" onPress={() => signIn(email, password)}>
+        Sign In
+      </Button>
+      <Button color="purple" textColor="white" onPress={() => signUp(email, password)}>
+        Sign Up
+      </Button>
+      <ButtonOutlined
+        textColor={'purple'}
+        color="transparent"
+        onPress={() => forgotPassword(email)}
+      >
+        Forgot Password
+      </ButtonOutlined>
       <GoogleAuthButton />
     </View>
   );

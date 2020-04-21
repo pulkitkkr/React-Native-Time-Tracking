@@ -1,27 +1,23 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { createUserProfileDocument, getUserDataFromSnapShot, UserCollection } from '@api/Firestore';
-
-export type User = FirebaseAuthTypes.User | null;
-
-type props = {
-  children: React.ReactNode;
-};
+import { User, UserDataFromAuth, UserCredentialFromAuth } from '@types/User';
 
 type authenticationFunction = (
   userName: string,
   password: string
-) => Promise<FirebaseAuthTypes.UserCredential>;
+) => Promise<UserCredentialFromAuth>;
 
 export interface UserProviderInterface {
   signIn: authenticationFunction;
   signOut: () => Promise<void>;
   signUp: authenticationFunction;
-  onGoogleSignIn: () => Promise<FirebaseAuthTypes.UserCredential>;
+  onGoogleSignIn: () => Promise<UserCredentialFromAuth>;
   forgotPassword: (email: string) => Promise<void>;
-  user: User;
+  user: User | null;
+  isLoggedIn: boolean;
 }
 
 const signOut = () => auth().signOut();
@@ -49,15 +45,19 @@ export const UserContext = React.createContext<UserProviderInterface>({
   signUp,
   forgotPassword,
   onGoogleSignIn,
+  isLoggedIn: false,
 });
 
-const UserProvider = ({ children }: props) => {
-  const [authData, setAuthData] = useState<User>(null);
-  const [user, setUser] = useState<any>(null);
+const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  const [authData, setAuthData] = useState<UserDataFromAuth | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
-  const onAuthStateChanged = async (userDataFromAuth: User) => {
+  const onAuthStateChanged = (userDataFromAuth: UserDataFromAuth | null) => {
     setAuthData(userDataFromAuth);
-    createUserProfileDocument(userDataFromAuth, {});
+
+    createUserProfileDocument(userDataFromAuth, {}).catch((e) =>
+      console.error('Error Occurred While Updating the User Collection', e)
+    );
   };
 
   useEffect(() => {
@@ -80,7 +80,17 @@ const UserProvider = ({ children }: props) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, signOut, signIn, signUp, forgotPassword, onGoogleSignIn }}>
+    <UserContext.Provider
+      value={{
+        user,
+        signOut,
+        signIn,
+        signUp,
+        forgotPassword,
+        onGoogleSignIn,
+        isLoggedIn: !!authData,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

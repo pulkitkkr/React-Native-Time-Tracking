@@ -1,18 +1,25 @@
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
-import type { User } from '@context/UserContext';
+import type {
+  UserDataFromAuth,
+  AdditionalUserData,
+  ClientGeneratedUserData,
+  User,
+} from '@types/User';
+import { UTC } from '@utils/Date';
 
 export const UserCollection = firestore().collection('Users');
 
 export const getUserDataFromSnapShot = (
   userSnapshot: FirebaseFirestoreTypes.DocumentSnapshot,
   uid: string
-) => {
-  return { uid, ...userSnapshot.data() };
+): User => {
+  const userData: UserDataFromAuth & ClientGeneratedUserData = userSnapshot.data();
+  return { uid, ...userData };
 };
 
 export const createUserProfileDocument = async (
-  user: User,
-  additionalData: { [key: string]: any }
+  user: UserDataFromAuth | null,
+  additionalData: AdditionalUserData
 ) => {
   if (!user) return;
 
@@ -21,18 +28,13 @@ export const createUserProfileDocument = async (
   const userSnapshot = await userReference.get();
 
   if (!userSnapshot.exists) {
-    const { displayName, photoURL, email } = user;
-    const createdAt = new Date();
-
     try {
       await firestore()
         .doc(`Users/${user.uid}`)
         .set({
-          displayName,
-          photoURL,
-          email,
-          createdAt,
+          ...user,
           ...additionalData,
+          createdAt: UTC.getDateString(),
         });
     } catch (err) {
       console.error('Unable to create user Document', err);

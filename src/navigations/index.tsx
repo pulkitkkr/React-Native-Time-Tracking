@@ -5,11 +5,11 @@ import HomeNavigator from '@navigations/HomeNavigator';
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 
 const Navigator = () => {
-  const { user }: UserProviderInterface = React.useContext(UserContext);
+  const { isLoggedIn }: UserProviderInterface = React.useContext(UserContext);
 
   return (
     <NavigationContainer>
-      {user ? <HomeNavigator /> : <AuthenticationNavigator />}
+      {isLoggedIn ? <HomeNavigator /> : <AuthenticationNavigator />}
     </NavigationContainer>
   );
 };

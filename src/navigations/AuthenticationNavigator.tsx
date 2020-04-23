@@ -13,7 +13,11 @@ GoogleSignin.configure({
 
 const AuthenticationNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name={LoginScreen.name} component={LoginScreen} />
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name={LoginScreen.name}
+      component={LoginScreen}
+    />
   </Stack.Navigator>
 );
 

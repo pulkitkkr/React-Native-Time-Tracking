@@ -7,12 +7,13 @@ import { uiColorToBaseColor, UiColor } from '@styleguide/styles/color';
 const DefaultTouchableOpacity = styled.TouchableOpacity<{ color: UiColor }>`
   border-radius: 8px;
   box-shadow: none;
-  padding: 13px 35px;
-  margin: 5px;
+  padding: 13px 10px;
+  margin: 5px 0;
   ${(props) => (props.color ? `background-color: ${uiColorToBaseColor(props.color)}` : '')}
 `;
 
 const DefaultButtonOutlined = styled(DefaultTouchableOpacity)`
+  padding: 12px 10px;
   border: 2px solid ${uiColorToBaseColor('purple')};
 `;
 

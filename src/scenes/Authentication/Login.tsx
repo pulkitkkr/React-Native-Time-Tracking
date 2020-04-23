@@ -1,12 +1,28 @@
 import * as React from 'react';
-import { View, Text, TextInput } from 'react-native';
+
+import styled from 'styled-components/native';
 import Animation from 'lottie-react-native';
 
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { GoogleAuthButton } from '@styleguide/components/index';
 import { Button, ButtonOutlined } from '@styleguide/components/Button';
+import { Input } from '@styleguide/components/Input';
 
 import * as AnimatedClipart from './animation.json';
+
+const StyledScrollView = styled.ScrollView`
+  padding: 5px 10px;
+`;
+
+const CenteredStyledView = styled.View`
+  flex: 1;
+  align-items: center;
+  margin-bottom: 50px;
+`;
+
+const SafeAreaView = styled.SafeAreaView`
+  flex: 1;
+`;
 
 const Login = () => {
   const { signIn, signUp, forgotPassword }: UserProviderInterface = React.useContext(UserContext);
@@ -20,39 +36,50 @@ const Login = () => {
     animationRef.current.play();
   }, [animationRef]);
   return (
-    <View>
-      <Animation
-        ref={animationRef}
-        style={{
-          width: 300,
-          height: 300,
-        }}
-        loop
-        source={AnimatedClipart}
-      />
-      <Text>Please Login Here</Text>
-      <TextInput placeholder="Email" value={email} onChangeText={(text) => setEmail(text)} />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        textContentType="password"
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Button color="purple" textColor="white" onPress={() => signIn(email, password)}>
-        Sign In
-      </Button>
-      <Button color="purple" textColor="white" onPress={() => signUp(email, password)}>
-        Sign Up
-      </Button>
-      <ButtonOutlined
-        textColor={'purple'}
-        color="transparent"
-        onPress={() => forgotPassword(email)}
-      >
-        Forgot Password
-      </ButtonOutlined>
-      <GoogleAuthButton />
-    </View>
+    <SafeAreaView>
+      <StyledScrollView>
+        <CenteredStyledView>
+          <Animation
+            ref={animationRef}
+            style={{
+              width: 300,
+              height: 300,
+            }}
+            loop
+            source={AnimatedClipart}
+          />
+        </CenteredStyledView>
+
+        <Input
+          label={'Enter Your Email'}
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <Input
+          label={'Enter Your Password'}
+          placeholder="Password"
+          value={password}
+          isInvalid
+          textContentType="password"
+          onChangeText={(text) => setPassword(text)}
+        />
+        <Button color="darkPurple" textColor="white" onPress={() => signIn(email, password)}>
+          Sign In
+        </Button>
+        <Button color="darkPurple" textColor="white" onPress={() => signUp(email, password)}>
+          Sign Up
+        </Button>
+        <ButtonOutlined
+          textColor={'darkPurple'}
+          color="transparent"
+          onPress={() => forgotPassword(email)}
+        >
+          Forgot Password
+        </ButtonOutlined>
+        <GoogleAuthButton />
+      </StyledScrollView>
+    </SafeAreaView>
   );
 };
 

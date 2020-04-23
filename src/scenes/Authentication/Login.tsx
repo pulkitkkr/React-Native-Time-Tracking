@@ -5,15 +5,16 @@ import Animation from 'lottie-react-native';
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { GoogleAuthButton } from '@styleguide/components/index';
 import { Button, ButtonOutlined } from '@styleguide/components/Button';
-import AnimatedClipart from './animation.json';
+
+import * as AnimatedClipart from './animation.json';
 
 const Login = () => {
   const { signIn, signUp, forgotPassword }: UserProviderInterface = React.useContext(UserContext);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const animationRef = React.useRef(null);
+  const animationRef = React.useRef<any>(null);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (!animationRef) return;
 
     animationRef.current.play();

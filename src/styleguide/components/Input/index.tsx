@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
 import { uiColorToBaseColor } from '@styleguide/styles/color';
+import { Text } from '@styleguide/components/index';
 
 import { TextInputProps } from 'react-native';
 
@@ -10,7 +11,7 @@ const Container = styled.View`
   margin-bottom: 5px;
 `;
 
-const Label = styled.Text`
+const Label = styled(Text)`
   font-size: 13px;
   font-weight: 600;
   color: ${uiColorToBaseColor('black')};
@@ -33,7 +34,7 @@ const StyledTextInput = styled.TextInput`
   padding: 10px 15px;
 `;
 
-const ErrorMessage = styled.Text`
+const ErrorMessage = styled(Text)`
   font-size: 13px;
   color: ${uiColorToBaseColor('red')};
 `;

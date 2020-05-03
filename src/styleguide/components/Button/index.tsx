@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
 import { TouchableOpacityProps } from 'react-native';
-
 import { uiColorToBaseColor, UiColor } from '@styleguide/styles/color';
+import { Text } from '@styleguide/components/index';
 
 const DefaultTouchableOpacity = styled.TouchableOpacity<{ color: UiColor; isDisabled: boolean }>`
   border-radius: 8px;
@@ -19,7 +19,7 @@ const DefaultButtonOutlined = styled(DefaultTouchableOpacity)`
   border: 2px solid ${uiColorToBaseColor('purple')};
 `;
 
-const DefaultButtonText = styled.Text<{ color: UiColor }>`
+const DefaultButtonText = styled(Text)<{ color: UiColor }>`
   font-weight: 500;
   font-size: 14px;
   text-align: center;

@@ -18,6 +18,6 @@ const HomePage = () => {
   );
 };
 
-HomePage.name = 'HomePage';
+HomePage.routeName = 'HomePage';
 
 export default HomePage;

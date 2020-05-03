@@ -2,8 +2,10 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import ENV_VARIABLES from 'react-native-config';
+import { uiColorToBaseColor } from '@styleguide/styles/color';
 
 import LoginScreen from '@scenes/Authentication/Login';
+import ForgotPasswordScreen from '@scenes/Authentication/ForgotPassword';
 
 const Stack = createStackNavigator();
 
@@ -15,8 +17,21 @@ const AuthenticationNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen
       options={{ headerShown: false }}
-      name={LoginScreen.name}
+      name={LoginScreen.routeName}
       component={LoginScreen}
+    />
+    <Stack.Screen
+      options={{
+        headerTitle: '',
+        headerBackTitle: '',
+        headerStyle: {
+          backgroundColor: uiColorToBaseColor('defaultGray'),
+        },
+        headerTintColor: uiColorToBaseColor('darkerGray'),
+        headerBackTitleStyle: { color: uiColorToBaseColor('darkerGray') },
+      }}
+      name={ForgotPasswordScreen.routeName}
+      component={ForgotPasswordScreen}
     />
   </Stack.Navigator>
 );

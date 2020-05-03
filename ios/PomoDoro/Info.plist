@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>FollowGram</string>
+	<string>PomoDoro</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.271391443422-6lo1jf0egq0ecobkuf90nrk563unbssl</string>
+				<string>com.googleusercontent.apps.271391443422-rj8d80v3rvc6badd9q5jkdf6flpos8ig</string>
 			</array>
 		</dict>
 	</array>

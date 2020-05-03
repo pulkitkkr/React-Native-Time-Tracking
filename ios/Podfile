@@ -21,8 +21,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'FollowGram' do
-  # Pods for FollowGram
+target 'PomoDoro' do
+  # Pods for PomoDoro
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -56,7 +56,7 @@ target 'FollowGram' do
   pod 'lottie-ios', :path => '../node_modules/lottie-ios'
   pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
 
-  target 'FollowGramTests' do
+  target 'PomoDoroTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -73,10 +73,10 @@ target 'FollowGram' do
   end
 end
 
-target 'FollowGram-tvOS' do
-  # Pods for FollowGram-tvOS
+target 'PomoDoro-tvOS' do
+  # Pods for PomoDoro-tvOS
 
-  target 'FollowGram-tvOSTests' do
+  target 'PomoDoro-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

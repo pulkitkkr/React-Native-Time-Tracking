@@ -57,10 +57,15 @@ const Login = () => {
           onChangeText={(text) => setEmail(text)}
         />
         <Input
+          label={'Enter Your Email'}
+          placeholder="Email"
+          value={"Invalid Field"}
+          isInvalid
+        />
+        <Input
           label={'Enter Your Password'}
           placeholder="Password"
           value={password}
-          isInvalid
           textContentType="password"
           onChangeText={(text) => setPassword(text)}
         />

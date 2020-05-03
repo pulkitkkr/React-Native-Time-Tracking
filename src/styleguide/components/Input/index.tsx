@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import { uiColorToBaseColor } from '@styleguide/styles/color';
 
-import { TextInput, TextInputProps } from 'react-native';
+import { TextInputProps } from 'react-native';
 
 const Container = styled.View`
   display: flex;
@@ -18,8 +18,7 @@ const Label = styled.Text`
 `;
 
 const TextInputWrapper = styled.View<{ isFocused: boolean; isInvalid: boolean }>`
-  background-color: ${(props) =>
-    uiColorToBaseColor(props.isInvalid ? 'lighterRed' : 'lighterPurple')};
+  background-color: ${(props) => uiColorToBaseColor(props.isInvalid ? 'lighterRed' : 'lightGray')};
   border-radius: 8px;
   border: 1px solid
     ${(props) =>
@@ -47,8 +46,8 @@ export const Input = (props: Props) => {
     <Container>
       {label && <Label>{label}</Label>}
       <TextInputWrapper isFocused={isFocused} isInvalid={isInvalid || false}>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <StyledTextInput
+          /* eslint-disable-next-line react/jsx-props-no-spreading */
           {...otherProps}
           selectionColor={uiColorToBaseColor('darkPurple')}
           onFocus={(e) => {

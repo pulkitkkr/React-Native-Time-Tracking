@@ -8,6 +8,9 @@ export type UiColor =
   | 'red'
   | 'lighterRed'
   | 'transparent'
+  | 'gray'
+  | 'darkGray'
+  | 'lightGray'
   | 'black';
 
 const colorsMapping: { [k in UiColor]: string } = {
@@ -16,6 +19,9 @@ const colorsMapping: { [k in UiColor]: string } = {
   purple: '#8562F6',
   lightPurple: '#8c6ff0',
   lighterPurple: '#ccc9e6',
+  lightGray: '#e1e7e6',
+  gray: '#ced5d4',
+  darkGray: '#a4abaa',
   white: '#fff',
   black: '#000314',
   red: '#aa1f48',

@@ -3,15 +3,19 @@ import * as yup from 'yup';
 import { TextInputProps, ScrollView } from 'react-native';
 
 import styled from 'styled-components/native';
-import Animation from 'lottie-react-native';
 import { useFormik } from 'formik';
 
 import { UserContext, UserProviderInterface } from '@context/UserContext';
-import { GoogleAuthButton, SafeAreaView, MainLayout } from '@styleguide/components/index';
+import {
+  GoogleAuthButton,
+  SafeAreaView,
+  MainLayout,
+  LottieAnimation,
+} from '@styleguide/components/index';
 import { Button, ButtonOutlined } from '@styleguide/components/Button';
 import { Input } from '@styleguide/components/Input';
 
-import * as AnimatedClipart from './animation.json';
+import * as LoginScreenAnimation from './animations/LoginScreenAnimation.json';
 
 const CenteredStyledView = styled.View`
   flex: 1;
@@ -37,14 +41,8 @@ type LoginForm = {
 
 // Todo: Navigator Props Types
 const Login = ({ navigation }: any) => {
-  const { signIn, signUp, forgotPassword }: UserProviderInterface = React.useContext(UserContext);
+  const { signIn, signUp }: UserProviderInterface = React.useContext(UserContext);
   const animationRef = React.useRef<any>(null);
-
-  React.useLayoutEffect(() => {
-    if (!animationRef) return;
-
-    animationRef.current.play();
-  }, [animationRef]);
 
   const initialFormValues = React.useMemo<LoginForm>(
     () => ({
@@ -91,14 +89,13 @@ const Login = ({ navigation }: any) => {
       <MainLayout>
         <ScrollView>
           <CenteredStyledView>
-            <Animation
-              ref={animationRef}
+            <LottieAnimation
               style={{
                 width: 300,
                 height: 300,
               }}
               loop
-              source={AnimatedClipart}
+              source={LoginScreenAnimation}
             />
           </CenteredStyledView>
           <Input

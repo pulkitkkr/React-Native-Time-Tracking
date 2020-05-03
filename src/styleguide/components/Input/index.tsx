@@ -33,13 +33,19 @@ const StyledTextInput = styled.TextInput`
   padding: 10px 15px;
 `;
 
+const ErrorMessage = styled.Text`
+  font-size: 13px;
+  color: ${uiColorToBaseColor('red')};
+`;
+
 interface Props extends TextInputProps {
   label?: string;
   isInvalid?: boolean;
+  errorMessage?: string;
 }
 
 export const Input = (props: Props) => {
-  const { label, isInvalid, onFocus, onBlur, ...otherProps } = props;
+  const { label, isInvalid, onFocus, onBlur, errorMessage, ...otherProps } = props;
   const [isFocused, setIsFocused] = React.useState(false);
 
   return (
@@ -64,6 +70,7 @@ export const Input = (props: Props) => {
           }}
         />
       </TextInputWrapper>
+      {!!errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Container>
   );
 };

@@ -4,11 +4,13 @@ import { TouchableOpacityProps } from 'react-native';
 
 import { uiColorToBaseColor, UiColor } from '@styleguide/styles/color';
 
-const DefaultTouchableOpacity = styled.TouchableOpacity<{ color: UiColor }>`
+const DefaultTouchableOpacity = styled.TouchableOpacity<{ color: UiColor; isDisabled: boolean }>`
   border-radius: 8px;
   box-shadow: none;
   padding: 13px 10px;
   margin: 5px 0;
+  opacity: ${(props) => (props.isDisabled ? '0.4' : '1')};
+
   ${(props) => (props.color ? `background-color: ${uiColorToBaseColor(props.color)}` : '')}
 `;
 
@@ -28,10 +30,11 @@ interface Props extends TouchableOpacityProps {
   children: React.ReactNode | string;
   color: UiColor;
   textColor?: UiColor;
+  isDisabled?: boolean;
 }
 
 const CreateButtonWithWrapper = (props: Props, ButtonWrapper: React.FunctionComponent<Props>) => {
-  const { children, color, textColor, ...otherProps } = props;
+  const { children, color, textColor, isDisabled, ...otherProps } = props;
 
   let childNode = children;
 
@@ -41,7 +44,7 @@ const CreateButtonWithWrapper = (props: Props, ButtonWrapper: React.FunctionComp
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <ButtonWrapper color={color} {...otherProps}>
+    <ButtonWrapper isDisabled={isDisabled} color={color} {...otherProps}>
       {childNode}
     </ButtonWrapper>
   );

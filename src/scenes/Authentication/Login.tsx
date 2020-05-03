@@ -1,7 +1,10 @@
 import * as React from 'react';
+import * as yup from 'yup';
+import { TextInputProps } from 'react-native';
 
 import styled from 'styled-components/native';
 import Animation from 'lottie-react-native';
+import { useFormik } from 'formik';
 
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { GoogleAuthButton } from '@styleguide/components/index';
@@ -24,10 +27,13 @@ const SafeAreaView = styled.SafeAreaView`
   flex: 1;
 `;
 
+type LoginForm = {
+  email: string;
+  password: string;
+};
+
 const Login = () => {
   const { signIn, signUp, forgotPassword }: UserProviderInterface = React.useContext(UserContext);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
   const animationRef = React.useRef<any>(null);
 
   React.useLayoutEffect(() => {
@@ -35,6 +41,44 @@ const Login = () => {
 
     animationRef.current.play();
   }, [animationRef]);
+
+  const initialFormValues = React.useMemo<LoginForm>(
+    () => ({
+      email: '',
+      password: '',
+    }),
+    []
+  );
+
+  const formValidationSchema = React.useMemo(() => {
+    return yup.object().shape({
+      email: yup.string().email('Please enter a valid email').required(),
+      password: yup.string().min(6, 'Password must be at least 6 characters long').required(),
+    });
+  }, []);
+
+  const signInForm = useFormik({
+    initialValues: initialFormValues,
+    validationSchema: formValidationSchema,
+    validateOnChange: false,
+    validateOnBlur: false,
+    onSubmit: (values, { setSubmitting }) => {
+      const { email, password } = values;
+
+      signIn(email, password)
+        .then(() => setSubmitting(false))
+        .catch(() => setSubmitting(false));
+    },
+  });
+
+  const {
+    values: { email, password },
+    handleChange,
+    errors,
+    handleSubmit,
+    isSubmitting,
+  } = signInForm;
+
   return (
     <SafeAreaView>
       <StyledScrollView>
@@ -49,27 +93,29 @@ const Login = () => {
             source={AnimatedClipart}
           />
         </CenteredStyledView>
-
         <Input
-          label={'Enter Your Email'}
+          label="Enter Your Email"
           placeholder="Email"
+          isInvalid={!!errors.email}
+          errorMessage={errors.email}
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={handleChange('email') as TextInputProps['onChangeText']}
         />
         <Input
-          label={'Enter Your Email'}
-          placeholder="Email"
-          value={"Invalid Field"}
-          isInvalid
-        />
-        <Input
-          label={'Enter Your Password'}
+          label="Enter Your Password"
           placeholder="Password"
           value={password}
+          isInvalid={!!errors.password}
+          errorMessage={errors.password}
           textContentType="password"
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={handleChange('password') as TextInputProps['onChangeText']}
         />
-        <Button color="darkPurple" textColor="white" onPress={() => signIn(email, password)}>
+        <Button
+          isDisabled={isSubmitting}
+          onPress={() => handleSubmit()}
+          color="darkPurple"
+          textColor="white"
+        >
           Sign In
         </Button>
         <Button color="darkPurple" textColor="white" onPress={() => signUp(email, password)}>

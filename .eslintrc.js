@@ -39,6 +39,7 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
     'comma-dangle': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

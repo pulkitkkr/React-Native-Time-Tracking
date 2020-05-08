@@ -57,6 +57,7 @@ buck-out/
 
 # Firebase Keys
 ios/GoogleService-Info.plist
+google-services.json
 
 # Environments
 .env

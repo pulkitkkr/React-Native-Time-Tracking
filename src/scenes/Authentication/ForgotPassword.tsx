@@ -1,13 +1,19 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { ScrollView, TextInputProps } from 'react-native';
+import { TextInputProps } from 'react-native';
 import { uiColorToBaseColor } from '@styleguide/styles/color';
 import { Input } from '@styleguide/components/Input';
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-import { MainLayout, SafeAreaView, Text, LottieAnimation } from '@styleguide/components/index';
+import {
+  MainLayout,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  LottieAnimation,
+} from '@styleguide/components/index';
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { Button } from '@styleguide/components/Button';
 

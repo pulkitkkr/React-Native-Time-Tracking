@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as yup from 'yup';
-import { TextInputProps, ScrollView } from 'react-native';
+import { TextInputProps } from 'react-native';
 
 import styled from 'styled-components/native';
 import { useFormik } from 'formik';
@@ -10,6 +10,7 @@ import {
   GoogleAuthButton,
   SafeAreaView,
   MainLayout,
+  ScrollView,
   LottieAnimation,
 } from '@styleguide/components/index';
 import { Button, ButtonOutlined } from '@styleguide/components/Button';

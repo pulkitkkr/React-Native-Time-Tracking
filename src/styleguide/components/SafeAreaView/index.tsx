@@ -1,6 +1,14 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
+import { Platform } from 'react-native';
 
 export default styled.SafeAreaView`
   flex: 1;
-  padding: 5px 20px;
+  ${Platform.select({
+    ios: css`
+      padding: 5px 20px;
+    `,
+    android: css`
+      padding: 0px;
+    `,
+  })};
 `;

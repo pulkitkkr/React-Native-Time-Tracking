@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { SafeAreaView, ScrollView, Text, StatusBar, Button } from 'react-native';
+import { StatusBar, Button } from 'react-native';
+
 import { UserContext, UserProviderInterface } from '@context/UserContext';
+
+import { SafeAreaView, ScrollView, Text } from '@styleguide/components/index';
 
 const HomePage = () => {
   const { signOut }: UserProviderInterface = React.useContext(UserContext);

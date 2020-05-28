@@ -7,16 +7,18 @@ import { useFormik } from 'formik';
 
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import {
-  GoogleAuthButton,
   SafeAreaView,
   MainLayout,
   ScrollView,
   LottieAnimation,
+  Text,
 } from '@styleguide/components/index';
-import { Button, ButtonOutlined } from '@styleguide/components/Button';
+import { Button } from '@styleguide/components/Button';
+import GoogleSignInButton from '@styleguide/components/GoogleSignInButton';
 import { Input } from '@styleguide/components/Input';
 
 import * as LoginScreenAnimation from './animations/LoginScreenAnimation.json';
+import { uiColorToBaseColor } from '@styleguide/styles/color';
 
 const CenteredStyledView = styled.View`
   flex: 1;
@@ -26,13 +28,27 @@ const CenteredStyledView = styled.View`
 
 const LoginFormActionsContainer = styled.View`
   flex: 1;
-  margin: 15px 0 20px;
+  margin: 10px 0 20px;
 `;
 
-const ForgetPasswordButton = styled(Button)`
+const FlexContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+`;
+
+const FlexOneButton = styled(Button)`
+  flex: 1;
   padding: 0;
   margin: 5px 0 0;
   border-width: 0;
+`;
+
+const StyledOrText = styled(Text)`
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+  color: ${uiColorToBaseColor('darkPurple')};
 `;
 
 type LoginForm = {
@@ -42,8 +58,7 @@ type LoginForm = {
 
 // Todo: Navigator Props Types
 const Login = ({ navigation }: any) => {
-  const { signIn, signUp }: UserProviderInterface = React.useContext(UserContext);
-  const animationRef = React.useRef<any>(null);
+  const { signIn }: UserProviderInterface = React.useContext(UserContext);
 
   const initialFormValues = React.useMemo<LoginForm>(
     () => ({
@@ -125,24 +140,26 @@ const Login = ({ navigation }: any) => {
             >
               Sign In
             </Button>
-            <ForgetPasswordButton
-              textColor="darkPurple"
-              color="transparent"
-              onPress={() => navigation.navigate('ForgotPasswordPage')}
-            >
-              Forgot Password?
-            </ForgetPasswordButton>
+            <FlexContainer>
+              <FlexOneButton
+                color="transparent"
+                textColor="darkPurple"
+                onPress={() => navigation.navigate('SignUpPage')}
+              >
+                Sign Up
+              </FlexOneButton>
+
+              <FlexOneButton
+                textColor="darkPurple"
+                color="transparent"
+                onPress={() => navigation.navigate('ForgotPasswordPage')}
+              >
+                Forgot Password?
+              </FlexOneButton>
+            </FlexContainer>
           </LoginFormActionsContainer>
-
-          <Button
-            color="transparent"
-            textColor="darkPurple"
-            onPress={() => signUp(email, password)}
-          >
-            Sign Up
-          </Button>
-
-          <GoogleAuthButton />
+          <StyledOrText>or</StyledOrText>
+          <GoogleSignInButton />
         </ScrollView>
       </MainLayout>
     </SafeAreaView>

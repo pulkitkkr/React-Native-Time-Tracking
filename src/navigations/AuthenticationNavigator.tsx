@@ -6,6 +6,7 @@ import { uiColorToBaseColor } from '@styleguide/styles/color';
 
 import LoginScreen from '@scenes/Authentication/Login';
 import ForgotPasswordScreen from '@scenes/Authentication/ForgotPassword';
+import SignUpScreen from '@scenes/Authentication/SignUp';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,19 @@ const AuthenticationNavigator = () => (
       }}
       name={ForgotPasswordScreen.routeName}
       component={ForgotPasswordScreen}
+    />
+    <Stack.Screen
+      options={{
+        headerTitle: '',
+        headerBackTitle: '',
+        headerStyle: {
+          backgroundColor: uiColorToBaseColor('defaultGray'),
+        },
+        headerTintColor: uiColorToBaseColor('darkerGray'),
+        headerBackTitleStyle: { color: uiColorToBaseColor('darkerGray') },
+      }}
+      name={SignUpScreen.routeName}
+      component={SignUpScreen}
     />
   </Stack.Navigator>
 );

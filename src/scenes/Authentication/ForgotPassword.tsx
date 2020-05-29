@@ -17,7 +17,7 @@ import {
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { Button } from '@styleguide/components/Button';
 
-import MessageSentConfirmationScreen from './MessageSentConfirmationScreen.tsx';
+import MessageSentConfirmationScreen from './MessageSentConfirmationScreen';
 import * as ForgotPasswordScreenAnimation from './animations/ForgotPasswordAnimation.json';
 
 const Heading = styled(Text)`

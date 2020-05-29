@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as yup from 'yup';
-import { TextInputProps } from 'react-native';
 
 import styled from 'styled-components/native';
 import { useFormik } from 'formik';
@@ -19,6 +18,9 @@ import { Input } from '@styleguide/components/Input';
 
 import * as LoginScreenAnimation from './animations/LoginScreenAnimation.json';
 import { uiColorToBaseColor } from '@styleguide/styles/color';
+import { Dimensions, TextInputProps } from 'react-native';
+
+const deviceWidth = Dimensions.get('window').width;
 
 const CenteredStyledView = styled.View`
   flex: 1;
@@ -107,8 +109,8 @@ const Login = ({ navigation }: any) => {
           <CenteredStyledView>
             <LottieAnimation
               style={{
-                width: 300,
-                height: 300,
+                width: deviceWidth * 0.5,
+                height: deviceWidth * 0.5,
               }}
               loop
               source={LoginScreenAnimation}
@@ -146,7 +148,8 @@ const Login = ({ navigation }: any) => {
                 textColor="darkPurple"
                 onPress={() => navigation.navigate('SignUpPage')}
               >
-                Sign Up
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                Don't have an account?
               </FlexOneButton>
 
               <FlexOneButton

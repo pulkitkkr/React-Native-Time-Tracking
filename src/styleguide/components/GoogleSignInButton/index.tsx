@@ -9,12 +9,13 @@ const IconAndTextContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 `;
 
 const StyledText = styled(Text)`
   margin-left: 20px;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
   color: ${uiColorToBaseColor('darkPurple')};
 `;

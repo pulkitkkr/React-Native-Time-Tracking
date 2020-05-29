@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { TextInputProps } from 'react-native';
+import { TextInputProps, Dimensions } from 'react-native';
 import { uiColorToBaseColor } from '@styleguide/styles/color';
 import { Input } from '@styleguide/components/Input';
 
@@ -17,22 +17,15 @@ import {
 import { UserContext, UserProviderInterface } from '@context/UserContext';
 import { Button } from '@styleguide/components/Button';
 
-import ResetPasswordMessageSent from './ResetPasswordMessageSent';
+import MessageSentConfirmationScreen from './MessageSentConfirmationScreen.tsx';
 import * as ForgotPasswordScreenAnimation from './animations/ForgotPasswordAnimation.json';
 
 const Heading = styled(Text)`
   margin: 10px 0;
   align-self: center;
-  font-size: 35px;
+  font-size: 28px;
   font-weight: 600;
   color: ${uiColorToBaseColor('darkPurple')};
-`;
-
-const SubHeading = styled(Text)`
-  margin-top: 20px;
-  margin-bottom: 5px;
-  font-size: 16px;
-  color: ${uiColorToBaseColor('darkerGray')};
 `;
 
 const CenteredStyledView = styled.View`
@@ -42,10 +35,12 @@ const CenteredStyledView = styled.View`
 `;
 
 const PasswordResetButton = styled(Button)`
-  margin-top: 10px;
+  margin-top: 15px;
 `;
 
 const EMAIL_SENT_STATUS = 'EMAIL_SENT_STATUS';
+
+const deviceWidth = Dimensions.get('window').width;
 
 const ForgotPassword = () => {
   const { forgotPassword }: UserProviderInterface = React.useContext(UserContext);
@@ -65,7 +60,7 @@ const ForgotPassword = () => {
       const { email } = values;
 
       forgotPassword(email)
-        .then((m) => {
+        .then(() => {
           setSubmitting(false);
           setStatus(EMAIL_SENT_STATUS);
         })
@@ -92,23 +87,27 @@ const ForgotPassword = () => {
       <MainLayout>
         <ScrollView>
           {isStatusEmailSent ? (
-            <ResetPasswordMessageSent />
+            <MessageSentConfirmationScreen
+              heading="Password Reset Link Sent"
+              subHeading="We have sent you a password reset link on your registered e-mail. Please reset your
+          password and try signing in again."
+            />
           ) : (
             <>
               <Heading>Forgot Password</Heading>
               <CenteredStyledView>
                 <LottieAnimation
                   style={{
-                    width: 200,
-                    height: 200,
+                    width: deviceWidth * 0.5,
+                    height: deviceWidth * 0.5,
                   }}
                   loop
                   source={ForgotPasswordScreenAnimation}
                 />
               </CenteredStyledView>
-              <SubHeading>Enter your e-mail</SubHeading>
               <Input
                 placeholder="Email"
+                label="Enter Your Email"
                 isInvalid={!!errors.email}
                 errorMessage={errors.email}
                 value={email}

@@ -2,7 +2,11 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
-import { createUserProfileDocument, getUserDataFromSnapShot, UserCollection } from '@api/FirebaseUser';
+import {
+  createUserProfileDocument,
+  getUserDataFromSnapShot,
+  UserCollection,
+} from '@api/FirebaseUser';
 import { User, UserDataFromAuth, UserCredentialFromAuth } from '@types/User';
 
 type authenticationFunction = (
@@ -53,6 +57,19 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const onAuthStateChanged = (userDataFromAuth: UserDataFromAuth | null) => {
+    if (userDataFromAuth && !userDataFromAuth.emailVerified) {
+      userDataFromAuth
+        .sendEmailVerification()
+        .then((m) => {
+          console.log(m);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      signOut();
+      return;
+    }
     setAuthData(userDataFromAuth);
 
     createUserProfileDocument(userDataFromAuth, {}).catch((e) =>

@@ -4,6 +4,7 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import { ButtonOutlined } from '@styleguide/components/Button';
 import { uiColorToBaseColor } from '@styleguide/styles/color';
+import { Dimensions } from 'react-native';
 import * as MessageSentAnimation from './animations/MessageSentAnimation.json';
 
 const OkButton = styled(ButtonOutlined)`
@@ -31,25 +32,31 @@ const SubHeading = styled(Text)`
   font-size: 16px;
   color: ${uiColorToBaseColor('darkerGray')};
 `;
-const ResetPasswordMessageSent = () => {
+
+interface Props {
+  heading: string;
+  subHeading: string;
+}
+
+const deviceWidth = Dimensions.get('window').width;
+
+const MessageSentConfirmationScreen = ({ heading, subHeading }: Props) => {
   const navigation = useNavigation();
 
   return (
     <>
-      <Heading>Message Sent</Heading>
+      <Heading>{heading}</Heading>
       <CenteredStyledView>
         <LottieAnimation
           style={{
-            width: 200,
-            height: 200,
+            width: deviceWidth * 0.5,
+            height: deviceWidth * 0.5,
           }}
+          resizeMode="cover"
           loop={false}
           source={MessageSentAnimation}
         />
-        <SubHeading>
-          We have sent you a password reset link on your registered e-mail. Please reset your
-          password and try signing in again.
-        </SubHeading>
+        <SubHeading>{subHeading}</SubHeading>
         <OkButton textColor="darkPurple" color="transparent" onPress={() => navigation.goBack()}>
           OK
         </OkButton>
@@ -58,4 +65,4 @@ const ResetPasswordMessageSent = () => {
   );
 };
 
-export default ResetPasswordMessageSent;
+export default MessageSentConfirmationScreen;

@@ -8,7 +8,7 @@ export default styled.View`
       padding: 5px 20px;
     `,
     android: css`
-      padding: 0px;
+      padding: 0;
     `,
   })};
 `;

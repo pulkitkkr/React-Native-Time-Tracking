@@ -64,9 +64,22 @@ const SignUp = () => {
       const { email, password } = values;
 
       signUp(email, password)
-        .then(() => {
-          setSubmitting(false);
-          setStatus(EMAIL_SENT_STATUS);
+        .then((userDataFromAuth) => {
+          const { user } = userDataFromAuth;
+
+          if (!user) {
+            return setErrors({ email: 'Please check the email you entered' });
+          }
+
+          user
+            .sendEmailVerification()
+            .then(() => {
+              setSubmitting(false);
+              setStatus(EMAIL_SENT_STATUS);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((e) => {
           setSubmitting(false);

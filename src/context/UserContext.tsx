@@ -58,18 +58,10 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const onAuthStateChanged = (userDataFromAuth: UserDataFromAuth | null) => {
     if (userDataFromAuth && !userDataFromAuth.emailVerified) {
-      userDataFromAuth
-        .sendEmailVerification()
-        .then((m) => {
-          console.log(m);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      signOut();
       return;
     }
+
+    console.log('In AuthStateChanged', userDataFromAuth);
     setAuthData(userDataFromAuth);
 
     createUserProfileDocument(userDataFromAuth, {}).catch((e) =>
@@ -79,17 +71,19 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!authData) {
-      setUser(null);
-    } else {
-      const { uid } = authData;
-
-      const subscriber = UserCollection.doc(uid).onSnapshot((userSnapshot) => {
-        const userData = getUserDataFromSnapShot(userSnapshot, uid);
-        setUser(userData);
-      });
-
-      return () => subscriber();
+      return setUser(null);
     }
+    if (authData && !authData.emailVerified) {
+      return signOut();
+    }
+
+    const { uid } = authData;
+    const subscriber = UserCollection.doc(uid).onSnapshot((userSnapshot) => {
+      const userData = getUserDataFromSnapShot(userSnapshot, uid);
+      setUser(userData);
+    });
+
+    return () => subscriber();
   }, [authData]);
 
   useEffect(() => {

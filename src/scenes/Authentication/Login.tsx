@@ -85,12 +85,22 @@ const Login = ({ navigation }: any) => {
     validationSchema: formValidationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: (values, { setSubmitting, setErrors }) => {
       const { email, password } = values;
 
       signIn(email, password)
-        .then(() => setSubmitting(false))
-        .catch(() => setSubmitting(false));
+        .then((userDataFromAuth) => {
+          const { user } = userDataFromAuth;
+
+          if (!user.emailVerified) {
+            setErrors({ email: 'Please verify your email and then try signing in' });
+          }
+          setSubmitting(false);
+        })
+        .catch((e) => {
+          console.log(e);
+          setSubmitting(false);
+        });
     },
   });
 

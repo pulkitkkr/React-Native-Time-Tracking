@@ -16,9 +16,9 @@ import { Button } from '@styleguide/components/Button';
 import GoogleSignInButton from '@styleguide/components/GoogleSignInButton';
 import { Input } from '@styleguide/components/Input';
 
-import * as LoginScreenAnimation from './animations/LoginScreenAnimation.json';
 import { uiColorToBaseColor } from '@styleguide/styles/color';
 import { Dimensions, TextInputProps } from 'react-native';
+import * as LoginScreenAnimation from './animations/LoginScreenAnimation.json';
 
 const deviceWidth = Dimensions.get('window').width;
 
